@@ -126,6 +126,11 @@ class DiffYum(yum.YumBase):
                 if obs_name not in ao:
                     ao[obs_name] = []
                 ao[obs_name].append(pkg)
+        for (pkg, _) in modified:
+            for obs_name in set(pkg.obsoletes_names):
+                if obs_name not in ao:
+                    ao[obs_name] = []
+                ao[obs_name].append(pkg)
 
         #  Note that this _only_ shows something when you have an additional
         # package obsoleting a removed package. If the obsoleted package is
